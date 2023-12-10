@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Bean Shop";
+}
+
+@model IEnumerable<Product>
+
+
+
+<div class="container" >
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="@product.ImageURL" class="card-img-top" alt="@product.Title">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Title</h5>
+                        <p class="card-text">@product.Description</p>
+                        <p class="card-text">Price: £@product.Price</p>
+                        <a asp-controller="Shop" asp-action="Details" asp-route-id="@product.Product_Id" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

@@ -1,0 +1,91 @@
+﻿@model ProductVM
+
+
+<div class="container">
+    <h1 class="text-center">@(Model.Product.Product_Id!=0?"Update":"Create")</h1>
+    <div class="row justify-content-around">
+        <div class="col-md-12">
+            <form asp-controller="Products" asp-action="Upsert" method="post" enctype="multipart/form-data">
+                <input asp-for="Product.Product_Id" hidden/>
+                <input asp-for="Product.ImageURL" hidden />
+                <div asp-validation-summary="All"></div>
+                <div class="row justify-content-start">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label asp-for="Product.Title"></label>
+                            <input type="text" class="form-control" asp-for="Product.Title" id="lettersOnlyField">
+                            <span asp-validation-for="Product.Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Product.Description"></label>
+                            <input type="text" class="form-control" asp-for="Product.Description">
+                            <span asp-validation-for="Product.Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Product.Author"></label>
+                            <input type="text" class="form-control" asp-for="Product.Author">
+                            <span asp-validation-for="Product.Author" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Product.ISBN"></label>
+                            <input type="text" class="form-control" asp-for="Product.ISBN">
+                            <span asp-validation-for="Product.ISBN" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Product.Price"></label>
+                            <input type="number" class="form-control" asp-for="Product.Price">
+                            <span asp-validation-for="Product.Price" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Product.Price50"></label>
+                            <input type="number" class="form-control" asp-for="Product.Price50">
+                            <span asp-validation-for="Product.Price50" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Product.Price100"></label>
+                            <input type="number" class="form-control" asp-for="Product.Price100">
+                            <span asp-validation-for="Product.Price100" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Product.Category_Id"></label>
+                            <select class="form-control" asp-for="Product.Category_Id" asp-items="@Model.CategoryList">
+                                <option disabled selected>--Select Category</option>
+                            </select>
+                            <span asp-validation-for="Product.Category_Id" class="text-danger"></span>
+                        </div>
+
+
+                        
+
+
+                        <br></br>
+                        @if (Model.Product.Product_Id != 0)
+                        {
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        }
+
+                        <a class="btn btn-primary ml-1 pull-right" asp-area="Admin" asp-controller="Products" asp-action="Index">Go Back</a>
+                    </div>
+                    <div class="col-6">
+                        <img src="@Model.Product.ImageURL" width="445px"/>
+                        <div class="form-group">
+
+
+                            <label asp-for="Product.ImageURL"></label>
+                            <input type="file" name="file" class="form-control" asp-for="Product.ImageURL">
+
+                        </div>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

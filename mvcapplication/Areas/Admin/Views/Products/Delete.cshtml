@@ -1,0 +1,69 @@
+﻿@model Product
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#lettersOnlyField").on("input", function () {
+                var inputText = $(this).val();
+                var pattern = /^[A-Za-z]+$/; // Only letters (both uppercase and lowercase)
+
+                if (!pattern.test(inputText)) {
+                    // Display an error message or prevent form submission
+                    alert("Please enter only letters.");
+                    $(this).val(""); // Clear the input field
+                }
+            });
+        });
+    </script>
+}
+
+<div class="container">
+    <h1 class="text-center">Delete Category</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form method="post">
+                <div class="form-group">
+                    <label asp-for="Title"></label>
+                    <input type="text" class="form-control" asp-for="Title" id="lettersOnlyField" disabled>
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <input type="text" class="form-control" asp-for="Description" disabled>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Author"></label>
+                    <input type="text" class="form-control" asp-for="Author" disabled>
+                    <span asp-validation-for="Author" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ISBN"></label>
+                    <input type="text" class="form-control" asp-for="ISBN" disabled>
+                    <span asp-validation-for="ISBN" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price"></label>
+                    <input type="number" class="form-control" asp-for="Price" disabled>
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price50"></label>
+                    <input type="number" class="form-control" asp-for="Price50" disabled>
+                    <span asp-validation-for="Price50" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price100"></label>
+                    <input type="number" class="form-control" asp-for="Price100" disabled>
+                    <span asp-validation-for="Price100" class="text-danger"></span>
+                    <input type="hidden" asp-for="Product_Id" />
+                </div>
+                <br></br>
+                <button type="submit" class="btn btn-outline-danger">Delete</button>
+                <a class="btn btn-primary ml-1 pull-right" asp-area="Admin" asp-controller="Products" asp-action="Index">Go Back</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

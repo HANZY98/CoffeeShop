@@ -1,0 +1,100 @@
+﻿@{
+    ViewData["Title"] = "Category Table";
+}
+@model List<Users>;
+
+@section scripts{
+
+    <script>
+        // Use jQuery.noConflict() to avoid conflicts with other versions of jQuery
+        jQuery.noConflict();
+
+        jQuery(document).ready(function ($) {
+            if (typeof $.fn.dataTable === 'undefined') {
+                console.error('DataTables not loaded properly. Check script references.');
+                return;
+            }
+
+            let table = $('#employeeTable').DataTable({
+                columns: [
+                    {
+                        className: 'dt-control',
+                        orderable: false,
+                        data: null,
+                        defaultContent: ''
+                    },
+                    { data: 'firstname' },
+                    { data: 'secondname' },
+                    { data: 'jobtitle' },
+                    { data: 'salary' },
+                    { data: 'id', visible: false }, // Hide the ID column
+                    { data: 'aboutme', visible: false } // Hide the AboutMe column
+                ],
+                order: [[1, 'asc']]
+            });
+
+            $('#employeeTable tbody').on('click', 'td.dt-control', function () {
+                let tr = $(this).closest('tr');
+                let row = table.row(tr);
+
+                if (row.child.isShown()) {
+                    row.child.hide();
+                    tr.removeClass('shown');
+                } else {
+                    row.child(format(row.data())).show();
+                    tr.addClass('shown');
+                }
+            });
+        });
+
+        function format(d) {
+            return (
+                '<dl>' +
+                '<dt>Id:</dt>' +
+                '<dd>' + d.id + '</dd>' +
+                '<dt>Extension number:</dt>' +
+                '<dd>' + d.aboutme + '</dd>' +
+                '<dt>Extra info:</dt>' +
+                '<dd>more information here</dd>' +
+                '</dl>'
+            );
+        }
+    </script>
+
+}
+
+
+
+
+<h1>Users List</h1>
+
+<table id="employeeTable" class="display">
+    <thead>
+        <tr>
+            <th></th>
+            <th>FirstName</th>
+            <th>SecondName</th>
+            <th>JobTitle</th>
+            <th>Salary</th>
+            <th style="display:none;"></th>
+            <th style="display:none;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="dt-control"></td>
+                <td>@item.FirstName</td>
+                <td>@item.SecondName</td>
+                <td>@item.JobTitle</td>
+                <td>@item.Salary</td>
+                <td style="display:none;">@item.Id</td>
+                <td style="display:none;">@item.AboutMe</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

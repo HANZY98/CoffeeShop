@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvcapplication", "mvcapplication.csproj", "{9BF3CD79-4172-4FDA-B6CF-A0052B6BD825}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "mvcapplication", "mvcapplication.csproj", "{9BF3CD79-4172-4FDA-B6CF-A0052B6BD825}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvcapplication.DataAccess", "..\mvcapplication.DataAccess\mvcapplication.DataAccess.csproj", "{715E5DCB-8C24-4342-871B-4C6A6EE9FF29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvcapplication.Models", "..\mvcapplication.Models\mvcapplication.Models.csproj", "{1C3A0D4C-E784-4529-8B71-3C5EF46AB57C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvcapplication.Utility", "..\mvcapplication.Utility\mvcapplication.Utility.csproj", "{FE2F9A77-48D9-47C8-A622-9E339777145E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{9BF3CD79-4172-4FDA-B6CF-A0052B6BD825}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9BF3CD79-4172-4FDA-B6CF-A0052B6BD825}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9BF3CD79-4172-4FDA-B6CF-A0052B6BD825}.Release|Any CPU.Build.0 = Release|Any CPU
+		{715E5DCB-8C24-4342-871B-4C6A6EE9FF29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{715E5DCB-8C24-4342-871B-4C6A6EE9FF29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{715E5DCB-8C24-4342-871B-4C6A6EE9FF29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{715E5DCB-8C24-4342-871B-4C6A6EE9FF29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C3A0D4C-E784-4529-8B71-3C5EF46AB57C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C3A0D4C-E784-4529-8B71-3C5EF46AB57C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C3A0D4C-E784-4529-8B71-3C5EF46AB57C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C3A0D4C-E784-4529-8B71-3C5EF46AB57C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE2F9A77-48D9-47C8-A622-9E339777145E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE2F9A77-48D9-47C8-A622-9E339777145E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE2F9A77-48D9-47C8-A622-9E339777145E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE2F9A77-48D9-47C8-A622-9E339777145E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

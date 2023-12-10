@@ -1,0 +1,83 @@
+﻿@model ShoppingCartVM
+@{
+    var count = 0;
+}
+
+<div class="container mt-5">
+    <h2>Your Shopping Cart</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">
+                    
+                </th>
+                <th scope="col">
+                    name
+                </th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Total</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var cart in Model.ShoppingCartList){
+                
+                count++;
+                <tr>
+                    <th scope="row">@count</th>
+                    <td></td>
+                    <td>@cart.Product.Title</td>
+                    <td>
+                        <input type="number" value="@cart.Count" min="1" class="form-control quantity-input"  disabled>
+                    </td>
+                    <td class="total-td"></td>
+                    <td>
+                        
+
+                        <a asp-action="Minus" asp-controller="Shop" asp-route-id="@cart.Id" type="button" class="btn btn-outline-secondary btn-sm">-</a>
+
+                        <a asp-action="Plus" asp-controller="Shop" asp-route-id="@cart.Id" type="button" class="btn btn-outline-secondary btn-sm">+</a>
+                        
+                    </td>
+                
+                    <td>
+                        <a asp-action="Remove" asp-controller="Shop" asp-route-id="@cart.Id" type="button" class="btn btn-outline-danger btn-sm">Remove</a>
+                    </td>
+                    
+                </tr>
+                
+            }
+            <!-- Add more rows for other products -->
+        </tbody>
+    </table>
+
+    <div class="row justify-content-end">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    
+                
+                    <h5 class="card-title">Cart Summary</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Subtotal
+                            <span class="badge badge-primary badge-pill" ></span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Shipping
+                            <span class="badge badge-primary badge-pill">$0.00</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center" >
+                            Total
+                            <span class="badge badge-primary badge-pill text-dark" >£@Model.OrderHeader.OrderTotal</span>
+                        </li>
+                    </ul>
+                    <a asp-action="Summary" asp-controller="Shop" type="button" class="btn btn-outline-success btn-sm">Checkout</a>
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

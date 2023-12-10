@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Category Table";
+}
+@model List<Category>;
+
+<partial name="_Notification"/>
+
+<h1>Category List</h1>
+
+<div class="container">
+    <h1 class="text-center">Category Table</h1> <a class="btn btn-primary" asp-area="Admin" asp-controller="Category" asp-action="Create">Add Category <i class="bi bi-plus-lg"></i></a>
+    <br></br>
+    <table class="table table-bordered table-striped text-center" id="mytable">
+        <thead>
+            <tr>
+                <th class="text-center">Job-Title</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Display Order</th>
+                <th class="text-center">Edit/Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Model.OrderBy(u=>u.DisplayOrder))
+            {
+                <tr>
+                    <td>@category.JobTitle</td>
+                    <td>@category.Name</td>
+                    <td>@category.DisplayOrder</td>
+                    <td>
+                        <div class="w-50 btn-group">
+                            <a asp-controller="Category" asp-action="Edit" asp-route-id="@category.Category_Id" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
+                            <a asp-controller="Category" asp-action="Delete" asp-route-id="@category.Category_Id" class="btn btn-outline-danger btn-sm "><i class="bi bi-x-square"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts{
+<script type="text/javascript">
+        // Wait for the document to be fully loaded and ready for manipulation
+        $(document).ready(function () {
+            // Initialize DataTable on an element with ID "mytable"
+            var table = $('#mytable').DataTable();
+
+            // Iterate over specific columns (1 and 2)
+            [0, 1].forEach(function (columnIndex) {
+                // Get the DataTable column for the current index
+                var column = table.column(columnIndex);
+
+                // Create a <select> element with specific Bootstrap classes and an empty option
+                var select = $('<select class="form-select form-select-sm" ><option value=""></option></select>')
+
+                    // Append the <select> to the column header and attach a change event listener
+                    .appendTo($(column.header()))
+                    .on('change', function () {
+                        // Get the selected value and escape it for proper searching
+                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                        // Set a search filter on the column, searching for exact matches, and redraw the table
+                        column
+                            .search(val ? '^' + val + '$' : '', true, false)
+                            .draw();
+                    });
+
+                // Populate the dropdown with unique values from the column
+                column.data().unique().sort().each(function (d, j) {
+                    select.append('<option value="' + d + '">' + d + '</option>');
+                });
+            });
+        });
+
+        
+</script>
+}

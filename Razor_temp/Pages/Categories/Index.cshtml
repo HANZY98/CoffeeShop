@@ -1,0 +1,33 @@
+﻿@page
+@model Razor_temp.Pages.Categories.IndexModel
+
+
+<h1>Category List</h1>
+
+<div class="container">
+    <h1 class="text-center">Category Table</h1> <a class="btn btn-primary" asp-area="" asp-page="Create" >Add Category <i class="bi bi-plus-lg"></i></a>
+    <table class="table table-bordered table-striped text-center">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Display Order</th>
+                <th>Edit/Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in Model.CategoryList.OrderBy(u=>u.DisplayOrder))
+            {
+                <tr>
+                    <td>@category.Name</td>
+                    <td>@category.DisplayOrder</td>
+                    <td>
+                        <div class="w-50 btn-group">
+                            <a asp-page="Edit" asp-route-id="@category.Category_Id" class="btn btn-primary btn-sm py-1"><i class="bi bi-pencil-square"></i></a>
+                            <a asp-page="Delete" asp-route-id="@category.Category_Id" class="btn btn-danger btn-sm py-1"><i class="bi bi-x-square"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,54 @@
+﻿
+@using mvcapplication.Models.ViewModels
+
+@{
+    ViewData["Title"] = "Product Table";
+}
+
+@model List<OrderVM>
+
+
+<partial name="_Notification" />
+
+<h1>Order List</h1>
+
+<div class="container">
+    <h1 class="text-center">Orders Table</h1> 
+    <br></br>
+    <table class="table table-bordered table-striped text-center" id="mytable">
+        <thead>
+            <tr>
+                <th class="text-center">ID</th>
+                <th class="text-center">Name</th>
+                <th class="text-center">Phone Number</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Total</th>
+                <th class="text-center">Edit</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var detail in Model)
+            {
+                <tr>
+                    <td>@detail.OrderHeader.Id</td>
+                    <td>@detail.OrderHeader.Name</td>
+                    <td>@detail.OrderHeader.PhoneNumber</td>
+                    <td>@detail.OrderHeader.OrderStatus</td>
+                    <td>@detail.OrderHeader.OrderTotal</td>
+                    <td>
+                        <a asp-controller="Order" asp-action="Details" asp-route-orderId="@detail.OrderHeader.Id" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
+                            
+                        
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+   
+
+
+
+

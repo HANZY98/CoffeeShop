@@ -1,0 +1,169 @@
+﻿@{
+    ViewData["Title"] = "Product Table";
+}
+@model List<Product>;
+
+<partial name="_Notification"/>
+
+<h1>Product List</h1>
+
+<div class="container">
+    <h1 class="text-center">Product Table</h1> <a class="btn btn-primary" asp-area="Admin" asp-controller="Products" asp-action="Upsert">Add Product <i class="bi bi-plus-lg"></i></a>
+    <br></br>
+    <table class="table table-bordered table-striped text-center" id="mytable">
+        <thead>
+            <tr>
+                <th class="text-center">Title</th>
+                <th class="text-center">Description</th>
+                <th class="text-center">ISBN</th>
+                <th class="text-center">Author</th>
+                <th class="text-center">Price</th>
+                <th class="text-center">Price50</th>
+                <th class="text-center">Price100</th>
+                <th class="text-center">Category</th>
+                <th class="text-center">Edit/Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.OrderBy(u=>u.Price))
+            {
+                <tr>
+                    <td>@product.Title</td>
+                    <td>@product.Description</td>
+                    <td>@product.ISBN</td>
+                    <td>@product.Author</td>
+                    <td>@product.Price</td>
+                    <td>@product.Price50</td>
+                    <td>@product.Price100</td>
+                    <td>@product.Category_Id</td>
+                    <td>@product.Category.Name</td>
+
+                    
+
+                    <td>
+                        <div class="w-50 btn-group">
+                            <a asp-controller="Products" asp-action="Upsert" asp-route-id="@product.Product_Id" class="btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
+                            <a asp-controller="Products" asp-action="Delete" asp-route-id="@product.Product_Id" class="btn btn-outline-danger btn-sm "><i class="bi bi-x-square"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+   
+    
+    <div class="d-flex p-2">
+        <div >
+            <canvas class="align-bottom"  height="300" width="400" id="productChart"></canvas>
+        </div>
+        <div >
+            <canvas class="align-bottom" height="340" width="400" id="barChart"></canvas>
+        </div>
+        <div >
+            <canvas class="align-bottom"  height="340" width="400" id="lineChart"></canvas>
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+    <!-- Prepare data from ASP.NET Core model
+
+    <!-- Initialize Chart.js -->
+    <script>
+
+        $(document).ready(function () {
+            var productData = @Html.Raw(Json.Serialize(Model.Select(p => new { Title = p.Title, Price = p.Price })));
+            
+            var newArrlabel = productData.map(item => item.title);
+            var newArrData = productData.map(item => item.price);
+            console.log(productData);
+            console.log(newArrlabel);
+            console.log(newArrData);
+
+
+            // Parse the Price values as numbers
+       
+
+            var ctx = document.getElementById("productChart").getContext('2d');
+            var chart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: newArrlabel,
+                    datasets: [{
+                        label: 'Product Prices',
+                        data: newArrData,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    animation: {
+                        duration: 1000, // Animation duration in milliseconds
+                        easing: 'easeInOutQuad', // Easing function (linear, easeInQuad, easeOutQuad, easeInOutQuad, and more)
+                    }
+                }
+            });
+            var barctx = document.getElementById("barChart").getContext('2d');
+            var barchart = new Chart(barctx, {
+                type: 'bar',
+                data: {
+                    labels: newArrlabel,
+                    datasets: [{
+                        label: 'Product Prices',
+                        data: newArrData,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    animation: {
+                        duration: 1000, // Animation duration in milliseconds
+                        easing: 'easeInOutQuad', // Easing function (linear, easeInQuad, easeOutQuad, easeInOutQuad, and more)
+                    }
+                }
+            });
+            var linectx = document.getElementById("lineChart").getContext('2d');
+            var linechart = new Chart(linectx, {
+                type: 'line',
+                data: {
+                    labels: newArrlabel,
+                    datasets: [{
+                        label: 'Product Prices',
+                        data: newArrData,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    animation: {
+                        duration: 1000, // Animation duration in milliseconds
+                        easing: 'easeInOutQuad', // Easing function (linear, easeInQuad, easeOutQuad, easeInOutQuad, and more)
+                    }
+                }
+            });
+        });
+        
+    </script>
+        
+
+}

@@ -1,54 +1,143 @@
-﻿<!DOCTYPE html>
+﻿@using mvcapplication.Utility;
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor; 
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - mvcapplication</title>
+    
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/mvcapplication.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <link rel="stlyesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css" />
+    <link rel="stlyesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="~/css/linearicons.css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/bootstrap.css">
+    <link rel="stylesheet" href="~/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/css/nice-select.css">
+    <link rel="stylesheet" href="~/css/animate.min.css">
+    <link rel="stylesheet" href="~/css/owl.carousel.css">
+    <link rel="stylesheet" href="~/css/main.css">
+    
+
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-clear border-bottom box-shadow mb-4">
+    <header id="header" id="home pb-1">
+        <nav class="navbar navbar-expand-xl navbar-light bg-clear   px-5">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">mvcapplication</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="" width="100px">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-xl-0">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" style="color: #443018;" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link " style="color: #443018;" asp-area="Customer" asp-controller="Home" asp-action="Privacy">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Categories</a>
+                            <a class="nav-link " style="color: #443018;" asp-area="Customer" asp-controller="Shop" asp-action="Index">Shop</a>
                         </li>
+                        
+                        @if(User.IsInRole(SD.Role_Admin)) {
+                        <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle " style="color: #443018;" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Manage Shop</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li class="nav-item">
+                                        <a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Order" asp-action="Index">Manage Order</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Category" asp-action="Index">Categories</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Users" asp-action="Index">Users</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-dark" asp-area="Admin" asp-controller="Products" asp-action="Index">Products</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-dark" asp-area="Identity" asp-page="/Account/Register" >Create User</a>
+                                </li>
+                                
+                            </ul>
+                        </li>
+                        }
+                        
                     </ul>
+                    
+                    @if(HttpContextAccessor.HttpContext.Session.GetInt32(SD.SessionCart)!=null){
+                    <li class="nav-item list-unstyled" style="position-relative">
+                            <a class="nav-link " style="color: #443018;" asp-area="Customer" asp-controller="Shop" asp-action="Cart" style="padding-bottom:5px;">
+                                <i class="bi bi-cart" style="color: #443018;"></i> &nbsp;
+                                (@HttpContextAccessor.HttpContext.Session.GetInt32(SD.SessionCart))
+                    </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item list-unstyled" style="position-relative">
+                            <a class="nav-link" style="color: #443018;" asp-area="Customer" asp-controller="Shop" asp-action="Cart" style="padding-bottom:5px;">
+                                <i class="bi bi-cart" style="color: #443018;"></i> &nbsp;
+                                (0)
+                            </a>
+                        </li>
+                    }
+
+                        
+                    <partial name="_LoginPartial"/>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div>
+        <main role="main" class="max-width">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class=" footer text-muted">
         <div class="container">
             &copy; 2023 - mvcapplication - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.130.1/build/three.min.js"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+   
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    
+    <script src="~/js/vendor/jquery-2.2.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="~/js/vendor/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+    <script src="~/js/easing.min.js"></script>
+    <script src="~/js/hoverIntent.js"></script>
+    <script src="~/js/superfish.min.js"></script>
+    <script src="~/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/jquery.sticky.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/parallax.min.js"></script>
+    <script src="~/js/waypoints.min.js"></script>
+    <script src="~/js/jquery.counterup.min.js"></script>
+    <script src="~/js/mail-script.js"></script>
+    <script src="~/js/main.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

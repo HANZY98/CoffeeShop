@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Razor_temp.props" />
+</Project>

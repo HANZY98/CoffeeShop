@@ -1,4 +1,6 @@
-html {
+
+
+/**/html {
   font-size: 14px;
 }
 
@@ -18,5 +20,48 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    overflow-x: hidden;
 }
+
+@media (max-width: 1200px) {
+    .navbar-nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .navbar-nav .nav-item {
+            text-align: center;
+            margin-left: 2.5rem;
+     }
+
+    .navbar-nav {
+        margin: auto; /* Set margin to auto for the UL element */
+    }
+
+    .navbutt{
+        display: flex;
+        justify-content: center;
+        
+    }
+
+    body {
+        margin: 0;
+        
+    }
+
+    #instructions {
+        position: absolute;
+        color: #666;
+        bottom: 0;
+        padding-bottom: 6px;
+        font-family: sans-serif;
+        width: 100%;
+        text-align: center;
+        pointer-events: none;
+    }
+}
+/* Adjust the media que
+
+

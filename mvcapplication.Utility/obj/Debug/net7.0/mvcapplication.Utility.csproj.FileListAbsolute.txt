@@ -1,0 +1,12 @@
+C:\Users\lukeh\Desktop\CoffeeShop\mvcapplication.Utility\bin\Debug\net7.0\mvcapplication.Utility.deps.json
+C:\Users\lukeh\Desktop\CoffeeShop\mvcapplication.Utility\bin\Debug\net7.0\mvcapplication.Utility.dll
+C:\Users\lukeh\Desktop\CoffeeShop\mvcapplication.Utility\bin\Debug\net7.0\mvcapplication.Utility.pdb
+C:\Users\lukeh\Desktop\CoffeeShop\mvcapplication.Utility\obj\Debug\net7.0\mvcapplication.Utility.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lukeh\Desktop\CoffeeShop\mvcapplication.Utility\obj\Debug\net7.0\mvcapplication.Utility.AssemblyInfoInputs.cache
+C:\Users\lukeh\Desktop\CoffeeShop\mvcapplication.Utility\obj\Debug\net7.0\mvcapplication.Utility.AssemblyInfo.cs
+C:\Users\lukeh\Desktop\CoffeeShop\mvcapplication.Utility\obj\Debug\net7.0\mvcapplication.Utility.csproj.CoreCompileInputs.cache
+C:\Users\lukeh\Desktop\CoffeeShop\mvcapplication.Utility\obj\Debug\net7.0\mvcapplication.Utility.dll
+C:\Users\lukeh\Desktop\CoffeeShop\mvcapplication.Utility\obj\Debug\net7.0\refint\mvcapplication.Utility.dll
+C:\Users\lukeh\Desktop\CoffeeShop\mvcapplication.Utility\obj\Debug\net7.0\mvcapplication.Utility.pdb
+C:\Users\lukeh\Desktop\CoffeeShop\mvcapplication.Utility\obj\Debug\net7.0\ref\mvcapplication.Utility.dll
+C:\Users\lukeh\Desktop\CoffeeShop\mvcapplication.Utility\obj\Debug\net7.0\mvcapplication.Utility.csproj.AssemblyReference.cache
